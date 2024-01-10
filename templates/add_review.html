@@ -1,0 +1,40 @@
+<!-- add_review.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Review</title>
+</head>
+<body>
+    <h1>Add Review</h1>
+    <form method="post" action="{{ url_for('add_review') }}">
+        <label for="airline">Airline:</label>
+        <input type="text" name="airline" required><br>
+        <label for="flight_number">Flight Number:</label>
+        <input type="text" name="flight_number" required><br>
+        <label for="registration">Registration:</label>
+        <input type="text" name="registration" required><br>
+        <label for="departure_airport">Departure Airport:</label>
+        <input type="text" name="departure_airport" required><br>
+        <label for="arrival_aiport">Arrival Aiport:</label>
+        <input type="text" name="arrival_airport" required><br>
+        <label for="aircraft_type">Aircraft Type:</label>
+        <input type="text" name="aircraft_type" required><br>
+        <label for="departure_delay">Departure Delay in minutes:</label>
+        <input type="number" name="departure_delay" required><br>
+        <label for="aircraft_cleanliness">Aircraft Cleanliness:</label>
+        <input type="number" name="aircraft_cleanliness" min="0" max="10" required><br>
+        <label for="friendliness">Friendliness:</label>
+        <input type="text" name="friendliness" min="0" max="10" required><br>
+        <label for="entertainment_quality">Entertainment Quality:</label>
+        <input type="text" name="entertainment_quality" min="0" max="10" required><br>
+        <label for="food_quality">Food Quality:</label>
+        <input type="text" name="food_quality" min="0" max="10" required><br>
+        <label for="user_friendliness">User Friendliness:</label>
+        <input type="text" name="user_friendliness" min="0" max="10" required><br>
+        <button type="submit">Add Review</button>
+    </form>
+</body>
+</html>

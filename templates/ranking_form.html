@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Ranking Form</title>
+</head>
+<body>
+    <h1>Custom Ranking Form</h1>
+
+    <!-- Voeg een formulier toe voor het kiezen van de ranking parameter -->
+    <form method="post" action="{{ url_for('custom_ranking') }}">
+        <label for="ranking_parameter">Choose Ranking Parameter:</label>
+        <select name="ranking_parameter" id="ranking_parameter" required>
+            <option value="friendliness">Friendliness</option>
+            <option value="departure_delay">Departure Delay</option>
+            <option value="aircraft_cleanliness">Aircraft Cleanliness</option>
+            <option value="entertainment_quality">Entertainment Quality</option>
+            <option value="food_quality">Food Quality</option>
+            <option value="user_friendliness">User Friendliness</option>
+            
+        </select>
+
+        <button type="submit">Generate Rankings</button>
+    </form>
+</body>
+</html>

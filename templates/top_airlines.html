@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Airlines</title>
+</head>
+<body>
+    <h1>Top Airlines</h1>
+
+    {% if top_airlines %}
+        <ul>
+            {% for review in top_airlines %}
+                <li>
+                    <strong>Airline:</strong> {{ review.airline }}<br>
+                    <strong>Friendliness Rating:</strong> {{ review.friendliness }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No reviews available for top airlines.</p>
+    {% endif %}
+</body>
+</html>

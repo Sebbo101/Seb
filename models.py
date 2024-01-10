@@ -2,10 +2,11 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    airline = db.Column(db.String(255), nullable=False)
     flight_number = db.Column(db.String(255), nullable=False)
+    airline = db.Column(db.String(255), nullable=False)
     registration = db.Column(db.String(255), nullable=False)
     departure_airport = db.Column(db.String(255), nullable=False)
     arrival_airport = db.Column(db.String(255), nullable=False)

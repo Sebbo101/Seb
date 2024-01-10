@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Reviews</title>
+</head>
+<body>
+    <h1>Search Reviews</h1>
+
+    <!-- Voeg een formulier toe voor het zoeken -->
+    <form method="post" action="{{ url_for('search') }}">
+        <label for="airline">Airline:</label>
+        <input type="text" name="airline" id="airline"><br>
+
+        <label for="flight_number">Flight Number:</label>
+        <input type="text" name="flight_number" id="flight_number"><br>
+
+        <label for="departure_airport">Departure Airport:</label>
+        <input type="text" name="departure_airport" id="departure_airport"><br>
+
+        <label for="registration">Registration:</label>
+        <input type="text" name="registration" id="registration"><br>
+
+        <label for="arrival_airport">Arrival Airport:</label>
+        <input type="text" name="arrival_airport" id="arrival_airport"><br>
+
+        <label for="aircraft_type">Aircraft Type:</label>
+        <input type="text" name="aircraft_type" id="aircraft_type"><br>
+
+        <label for="aircraft_cleanliness">Aircraft Cleanliness:</label>
+        <input type="number" name="aircraft_cleanliness" id="aircraft_cleanliness"><br>
+
+        <label for="friendliness">Friendliness:</label>
+        <input type="text" name="friendliness" id="friendliness"><br>
+
+        <label for="entertainment_quality">Entertainment Quality:</label>
+        <input type="number" name="entertainment_quality" id="entertainment_quality"><br>
+
+        <label for="food_quality">Food Quality:</label>
+        <input type="number" name="food_quality" id="food_quality"><br>
+
+        <label for="user_friendliness">User Friendliness:</label>
+        <input type="text" name="user_friendliness" id="user_friendliness"><br>
+
+        <!-- Voeg andere velden toe afhankelijk van je model -->
+
+        <button type="submit">Search</button>
+    </form>
+</body>
+</html>

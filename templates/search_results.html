@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+
+    {% if reviews %}
+        <ul>
+            {% for review in reviews %}
+                <li>
+                    <strong>Airline:</strong> {{ review.airline }}<br>
+                    <strong>Flight Number:</strong> {{ review.flight_number }}<br>
+                    <!-- Voeg andere velden toe afhankelijk van je model -->
+
+                    <!-- Maak een koppeling naar de detailpagina voor deze review -->
+                    <a href="{{ url_for('view_review', review_id=review.id) }}">View Details</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</body>
+</html>
