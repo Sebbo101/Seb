@@ -1,0 +1,10 @@
+/* app/static/styles/main.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+}
+
+#reviews-container {
+    margin-top: 20px;
+}
