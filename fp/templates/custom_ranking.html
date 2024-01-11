@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/styles/main.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Ranking Results</title>
+</head>
+<body>
+    <h1>Custom Ranking Results</h1>
+
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% else %}
+        <h2>Top 10 Airlines based on {{ parameter|replace('_', ' ')|title }}</h2>
+        {% if top_list %}
+            <ul>
+                {% for review in top_list %}
+                    <li>
+                        <strong>Airline:</strong> {{ review.airline }}<br>
+                        <strong>{{ parameter|replace('_', ' ')|title }} Rating:</strong> {{ review[parameter] }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No reviews available for top airlines.</p>
+        {% endif %}
+
+        <h2>Flop 10 Airlines based on {{ parameter|replace('_', ' ')|replace('_', ' ')|title }}</h2>
+        {% if flop_list %}
+            <ul>
+                {% for review in flop_list %}
+                    <li>
+                        <strong>Airline:</strong> {{ review.airline }}<br>
+                        <strong>{{ parameter|replace('_', ' ')|title }} Rating:</strong> {{ review[parameter] }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No reviews available for flop airlines.</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>

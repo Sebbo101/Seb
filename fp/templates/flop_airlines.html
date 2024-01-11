@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/styles/main.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flop Airlines</title>
+</head>
+<body>
+    <h1>Flop Airlines</h1>
+
+    {% if flop_airlines %}
+        <ul>
+            {% for review in flop_airlines %}
+                <li>
+                    <strong>Airline:</strong> {{ review.airline }}<br>
+                    <strong>Friendliness Rating:</strong> {{ review.friendliness }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No reviews available for flop airlines.</p>
+    {% endif %}
+</body>
+</html>

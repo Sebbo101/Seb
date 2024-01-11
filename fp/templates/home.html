@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/styles/main.css"/>
+    <link rel="stylesheet" href="/static/styles/styles.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            flex: 0 0 calc(33.33% - 20px);
+        }
+
+        .card-container {
+            max-width: 900px;
+            max-height: 0px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Flight Reviews</h1>
+    <div class="card-container">
+        <a class="card" href="{{ url_for('add_review') }}">
+            <h2>Add a review</h2>
+            <p>Add a review to the community.</p>
+        </a>
+        <a class="card" href="{{ url_for('top_airlines') }}">
+            <h2>Top airlines</h2>
+            <p>Find the top airlines in our community.</p>
+            <span>Go to top airlines</span>
+        </a>
+        <a class="card" href="{{ url_for('flop_airlines') }}">
+            <h2>Flop airlines</h2>
+            <p>Find the flop airlines in our community.</p>
+            <span>Go to flop airlines</span>
+        </a>
+        <a class="card" href="{{ url_for('category_overviews') }}">
+            <h2>Average ratings</h2>
+            <p>View the average ratings of all airlines.</p>
+            <span>Go to average ratings</span>
+        </a>
+        <a class="card" href="{{ url_for('custom_ranking') }}">
+            <h2>Custom Ranking</h2>
+            <p>Rank airlines according to your own criteria.</p>
+            <span>Go to custom ranking</span>
+        </a>
+        <a class="card" href="{{ url_for('search') }}">
+            <h2>Search reviews</h2>
+            <p>Search all reviews in our community.</p>
+            <span>Go to review search</span>
+        </a>
+    </div>
+</body>
+</html>

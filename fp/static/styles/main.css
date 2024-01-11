@@ -1,0 +1,46 @@
+/* app/static/styles/main.css */
+
+@font-face {
+    font-family: metropolis;
+    src: url(Metropolis-Regular.otf);
+}
+
+@font-face {
+    font-family: metropolis;
+    src: url(Metropolis-Bold.otf);
+    font-weight: bold;
+}
+body {
+    color: white;
+    background-color: #C62E65;
+    font-family: 'metropolis', sans-serif;
+    margin: 20px;
+}
+
+#reviews-container {
+    margin-top: 20px;
+}
+
+/* unvisited link */
+a:link {
+    text-decoration: none;
+    color: white;
+  }
+  
+  /* visited link */
+  a:visited {
+    text-decoration: none;
+    color: white;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    text-decoration: none;
+    color: white;
+  }
+  
+  /* selected link */
+  a:active {
+    text-decoration: none;
+    color: white;
+  }

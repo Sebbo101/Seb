@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/styles/main.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Detail</title>
+</head>
+<body>
+    <h1>Review Detail</h1>
+
+    <dl>
+        <dt>Airline:</dt>
+        <dd>{{ review.airline }}</dd>
+        <dt>Flight Number:</dt>
+        <dd>{{ review.flight_number }}</dd>
+        <dt>Registration:</dt>
+        <dd>{{ review.registration }}</dd>   
+        <dt>Departure Airport:</dt>
+        <dd>{{ review.departure_airport }}</dd>
+        <dt>Arrival Airport:</dt>
+        <dd>{{ review.arrival_airport }}</dd>
+        <dt>Aircraft Type:</dt>
+        <dd>{{ review.aircraft_type }}</dd>
+        <dt>Departure Delay:</dt>
+        <dd>{{ review.departure_delay }} minutes</dd>
+        <dt>Aircraft Cleanliness:</dt>
+        <dd>{{ review.aircraft_cleanliness }}</dd>
+        <dt>Friendliness:</dt>
+        <dd>{{ review.friendliness }}</dd>
+        <dt>Entertainment Quality:</dt>
+        <dd>{{ review.entertainment_quality  }}</dd>
+        <dt>Food Quality:</dt>
+        <dd>{{ review.food_quality }}</dd>
+        <dt>User Friendliness:</dt>
+        <dd>{{ review.user_friendliness }}</dd>
+    </dl>
+</body>
+</html>
