@@ -1,10 +1,52 @@
 /* app/static/styles/main.css */
 
+@font-face {
+    font-family: D-DIN;
+    src: url(D-DIN.otf);
+}
+
+@font-face {
+    font-family: D-DIN;
+    src: url(D-DIN-Bold.otf);
+    font-weight: bold;
+}
+
+@font-face {
+  font-family: D-DIN;
+  src: url(D-DIN-Italic.otf);
+  font-weight: italic;
+}
 body {
-    font-family: 'Arial', sans-serif;
+    color: #caf0f8;
+    background: linear-gradient(to right, #4879B0, #210CAE);
+    font-family: 'D-DIN', sans-serif;
     margin: 20px;
 }
 
 #reviews-container {
     margin-top: 20px;
 }
+
+/* unvisited link */
+a:link {
+    text-decoration: none;
+    color: white;
+  }
+  
+  /* visited link */
+  a:visited {
+    text-decoration: none;
+    color: white;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    text-decoration: none;
+    color: white;
+  }
+  
+  /* selected link */
+  a:active {
+    text-decoration: none;
+    color: white;
+  }

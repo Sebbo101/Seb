@@ -1,0 +1,72 @@
+/* fp/static/styles/styles.css */
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background: linear-gradient(to right, #3826AD, #4C82E6); 
+    border: 0px solid ;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px;
+    width: 200px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card:active {
+    transform: scale(0.95);
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+.navigation-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to right, #210CAE, #4C68E6);
+    padding: 20px;
+}
+
+.navigation-bar a {
+    color: white;
+    text-decoration: none;
+    margin-bottom: 20px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navigation-bar a:hover {
+    color: #4CE687; /* Kleur aanpassen op basis van je ontwerp */
+}

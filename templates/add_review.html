@@ -3,37 +3,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="/static/styles/main.css"/>
+    <link rel="stylesheet" href="/static/styles/styles.css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Review</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-weight: bold;
+            animation: fadeInLeft 1.5s ease-out;
+        }
+
+        form {
+            max-width: 400px; /* Pas aan op basis van je ontwerp */
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #4CE687; /* Kleur aanpassen op basis van je ontwerp */
+        }
+
+        button {
+            background: linear-gradient(to right, #3826AD, #4ce687);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+         /* Nieuwe stijl toegevoegd voor het groeperen van gerelateerde velden */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }       
+    </style>
 </head>
 <body>
+    <div class="navigation-bar">
+        <a href="{{ url_for('home') }}">Home</a>
+    </div>
     <h1>Add Review</h1>
     <form method="post" action="{{ url_for('add_review') }}">
-        <label for="airline">Airline:</label>
-        <input type="text" name="airline" required><br>
-        <label for="flight_number">Flight Number:</label>
-        <input type="text" name="flight_number" required><br>
-        <label for="registration">Registration:</label>
-        <input type="text" name="registration" required><br>
+        <!-- Gerelateerde velden gegroepeerd -->
+        <div class="form-group">
+            <label for="airline">Airline:</label>
+            <input type="text" name="airline" required>
+        </div>
+
+        <div class="form-group">
+            <label for="flight_number">Flight Number:</label>
+            <input type="text" name="flight_number" required>
+        </div>
+
+        <div class="form-group">
+            <label for="registration">Registration:</label>
+            <input type="text" name="registration" required>
+        </div>
+
         <label for="departure_airport">Departure Airport:</label>
-        <input type="text" name="departure_airport" required><br>
-        <label for="arrival_aiport">Arrival Aiport:</label>
-        <input type="text" name="arrival_airport" required><br>
+        <input type="text" name="departure_airport" required>
+
+        <label for="arrival_airport">Arrival Airport:</label>
+        <input type="text" name="arrival_airport" required>
+
         <label for="aircraft_type">Aircraft Type:</label>
-        <input type="text" name="aircraft_type" required><br>
+        <input type="text" name="aircraft_type" required>
+
         <label for="departure_delay">Departure Delay in minutes:</label>
-        <input type="number" name="departure_delay" required><br>
+        <input type="number" name="departure_delay" required>
+
         <label for="aircraft_cleanliness">Aircraft Cleanliness:</label>
-        <input type="number" name="aircraft_cleanliness" min="0" max="10" required><br>
+        <input type="number" name="aircraft_cleanliness" min="0" max="10" required>
+
         <label for="friendliness">Friendliness:</label>
-        <input type="text" name="friendliness" min="0" max="10" required><br>
+        <input type="number" name="friendliness" min="0" max="10" required>
+
         <label for="entertainment_quality">Entertainment Quality:</label>
-        <input type="text" name="entertainment_quality" min="0" max="10" required><br>
+        <input type="number" name="entertainment_quality" min="0" max="10" required>
+
         <label for="food_quality">Food Quality:</label>
-        <input type="text" name="food_quality" min="0" max="10" required><br>
+        <input type="number" name="food_quality" min="0" max="10" required>
+
         <label for="user_friendliness">User Friendliness:</label>
-        <input type="text" name="user_friendliness" min="0" max="10" required><br>
+        <input type="number" name="user_friendliness" min="0" max="10" required>
+
         <button type="submit">Add Review</button>
     </form>
 </body>

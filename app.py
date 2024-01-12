@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_migrate import Migrate
 from models import db, Review
 from sqlalchemy import or_, desc, func
+from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///reviews.db'  # SQLite-database bestand
@@ -13,6 +14,35 @@ migrate = Migrate(app, db)
 def index():
     reviews = Review.query.all()
     return render_template('index.html', reviews=reviews)
+
+# test route voor home
+@app.route('/home')
+def home():
+    reviews = Review.query.all()
+    return render_template('home.html', reviews=reviews)
+
+@app.route('/reviews')
+def review_overview():
+    reviews = Review.query.order_by(Review.timestamp.desc()).all()
+    return render_template('review_overview.html', reviews=reviews)
+
+@app.route('/api/reviews')
+def api_reviews():
+    filter_option = request.args.get('filter', 'all')
+
+    # Haal reviews op basis van het filter
+    if filter_option == 'all':
+        reviews = Review.query.order_by(Review.timestamp.desc()).all()
+    elif filter_option == 'airline':
+        reviews = Review.query.order_by(Review.timestamp.desc()).all()
+    # Voeg hier andere filters toe op basis van je attributen (voeg extra elif-clausules toe)
+    else:
+        return jsonify([])
+
+    # Maak een lijst met dictonaries van reviewgegevens
+    reviews_data = [{'airline': review.airline, 'timestamp': review.timestamp} for review in reviews]
+
+    return jsonify(reviews_data)
 
 @app.route('/add_review', methods=['GET', 'POST'])
 def add_review():

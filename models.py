@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -17,3 +18,4 @@ class Review(db.Model):
     entertainment_quality = db.Column(db.Integer, nullable=False)
     food_quality = db.Column(db.Integer, nullable=False)
     user_friendliness = db.Column(db.Integer, nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
