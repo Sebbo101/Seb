@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/static/styles/main.css" />
+    <link rel="stylesheet" href="/static/styles/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Reviews</title>
+    <style>
+        body {
+            color: #f0f0f0;
+            background: #002147;
+            font-family: 'D-DIN', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            margin-top: 0; /* Remove default top margin */
+        }
+
+        .title-container {
+            background: #002147;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .title-box {
+            padding: 10px 20px;
+        }
+
+
+
+
+        .nav-box,
+        .testimonial-section,
+        .featured-airlines-section,
+        .about-us-section,
+        .fake-twitter-section,
+        .fake-instagram-section,
+        .contact-section,
+        .footer {
+            max-width: 820px;
+            margin: 0 auto;
+            text-align: center;
+            background: #35424a; /* Slightly darker neutral color for boxes */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+            background: #35424a;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .average-ratings-container {
+            background-color: #35424a;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title-container">
+        <div class="title-box">
+            <h1>Flight Reviews</h1>
+        </div>
+    </div>
+
+    <div class="nav-container">
+        <div class="nav-box">
+            <div class="nav-buttons">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('add_review') }}">Add a Review</a>
+                <a href="{{ url_for('top_airlines') }}">Top Airlines</a>
+                <a href="{{ url_for('flop_airlines') }}">Flop Airlines</a>
+                <a href="{{ url_for('custom_ranking') }}">Custom Ranking</a>
+                <a href="{{ url_for('search') }}">Search Reviews</a>
+                <a href="{{ url_for('category_overviews') }}">Category Overviews</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Average Ratings</h2>
+        <div class="average-ratings-container">
+            <ul>
+                {% for category, average_rating in average_ratings.items() %}
+                <li><strong>{{ category }}:</strong> {{ average_rating|default('No reviews yet')|round(1) }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

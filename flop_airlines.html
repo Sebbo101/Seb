@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/static/styles/main.css" />
+    <link rel="stylesheet" href="/static/styles/styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Reviews</title>
+    <style>
+        body {
+            color: #fff; /* White text color for better readability */
+            background: #002147; /* Darker blue background */
+            font-family: 'D-DIN', sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+
+        .nav-box,
+        .testimonial-section,
+        .featured-airlines-section,
+        .about-us-section,
+        .fake-twitter-section,
+        .fake-instagram-section,
+        .contact-section,
+        .footer {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            background: #35424a; /* Slightly darker neutral color for boxes */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .fake-social-media a {
+            text-decoration: none;
+            color: #007BFF; /* Accent color for links */
+            font-weight: bold;
+        }
+
+        .nav-buttons a {
+            margin-right: 10px; /* Adjust the space between words by changing the margin values */
+            color: #007BFF; /* Accent color for links */
+        }
+
+        .small-box {
+            position: fixed;
+            bottom: 15px;
+            right: 20px;
+            max-width: 230px; /* Adjusted width for the small box */
+            background: #35424a; /* Slightly darker neutral color for box */
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .fun-travel-tip {
+            color: #fff; /* White text color for better readability */
+            font-size: 14px; /* Adjusted font size for the travel tip */
+        }
+
+        /* Styles for Flight Reviews specific elements */
+        h1 {
+            font-weight: bold;
+            color: #fff; /* White text color for the title */
+        }
+
+        .flop-airlines-box {
+            background: #35424a; /* Matching grey color to the navigation box */
+            border: 2px solid #007BFF; /* Accent color for the box border */
+            border-radius: 12px; /* Increased border-radius for a softer look */
+            padding: 20px;
+            margin: 20px 0; /* Adjusted margin for spacing */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow for depth */
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Flight Reviews</h1>
+    </div>
+
+    <div class="nav-box">
+        <div class="nav-buttons">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('add_review') }}">Add a Review</a>
+            <a href="{{ url_for('top_airlines') }}">Top Airlines</a>
+            <a href="{{ url_for('flop_airlines') }}">Flop Airlines</a>
+            <a href="{{ url_for('custom_ranking') }}">Custom Ranking</a>
+            <a href="{{ url_for('search') }}">Search Reviews</a>
+            <a href="{{ url_for('category_overviews') }}">Category Overviews</a>
+        </div>
+    </div>
+
+    <div class="body-content">
+        <div class="flop-airlines-box">
+            <h1>Flop Airlines</h1>
+
+            {% if flop_airlines %}
+            <ul>
+                {% for review in flop_airlines %}
+                <li>
+                    <strong>Airline:</strong> {{ review.airline }}<br>
+                    <strong>Friendliness Rating:</strong> {{ review.friendliness }}
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No reviews available for flop airlines.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>

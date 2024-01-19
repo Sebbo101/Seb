@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/styles/main.css"/>
+    <link rel="stylesheet" href="/static/styles/styles.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Ranking Results</title>
+    <style>
+        body {
+            color: #f0f0f0;
+            background: #002147;
+            font-family: 'D-DIN', sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+
+        .header {
+            text-align: left;
+            margin: 20px;
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #4CE687;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #4CE687;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Flight Reviews</h1>
+    </div>
+
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% else %}
+        <div class="top-list-container">
+            <h2>Top 10 Airlines based on {{ parameter|replace('_', ' ')|title }}</h2>
+            {% if top_list %}
+                <ul>
+                    {% for review in top_list %}
+                        <li>
+                            <strong>Airline:</strong> {{ review.airline }}<br>
+                            <strong>{{ parameter|replace('_', ' ')|title }} Rating:</strong> {{ review[parameter] }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No reviews available for top airlines.</p>
+            {% endif %}
+        </div>
+
+        <div class="flop-list-container">
+            <h2>Flop 10 Airlines based on {{ parameter|replace('_', ' ')|title }}</h2>
+            {% if flop_list %}
+                <ul>
+                    {% for review in flop_list %}
+                        <li>
+                            <strong>Airline:</strong> {{ review.airline }}<br>
+                            <strong>{{ parameter|replace('_', ' ')|title }} Rating:</strong> {{ review[parameter] }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No reviews available for flop airlines.</p>
+            {% endif %}
+        </div>
+    {% endif %}
+</body>
+</html>

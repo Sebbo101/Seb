@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/styles/main.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Reviews</title>
+</head>
+<body>
+    <h1>Welcome to Flight Reviews</h1>
+    <p>Explore different sections:</p>
+    <ul>
+        <li><a href="{{ url_for('home') }}">Home pagina</a></li>
+        <li><a href="{{ url_for('add_review') }}">Add a Review</a></li>
+        <li><a href="{{ url_for('top_airlines') }}">Top Airlines</a></li>
+        <li><a href="{{ url_for('flop_airlines') }}">Flop Airlines</a></li>
+        <li><a href="{{ url_for('custom_ranking') }}">Custom Ranking</a></li>
+        <li><a href="{{ url_for('search') }}">Search Reviews</a></li>
+        <li><a href="{{ url_for('category_overviews') }}">Category Overviews</a></li>
+    </ul>
+
+    <h2>Latest Reviews</h2>
+    {% for review in reviews %}
+        <div>
+            <h3><a href="{{ url_for('view_review', review_id=review.id) }}">{{ review.airline }}</a></h3>
+            <p>Flight Number: {{ review.flight_number }}</p>
+            <!-- Add other relevant information here -->
+        </div>
+    {% endfor %}
+</body>
+</html>

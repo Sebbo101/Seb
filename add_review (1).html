@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/static/styles/main.css" />
+    <link rel="stylesheet" href="/static/styles/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Reviews</title>
+    <style>
+        body {
+            color: #f0f0f0;
+            background: #002147;
+            font-family: 'D-DIN', sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .nav-box,
+        .add-review-section,
+        .info-section {
+            max-width: 800px;
+            text-align: center;
+            background: #35424a;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #4CE687;
+        }
+
+        button {
+            background: linear-gradient(to right, #3826AD, #4ce687);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .small-box {
+            position: fixed;
+            bottom: 15px;
+            right: 20px;
+            max-width: 230px;
+            background: #35424a;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .fun-travel-tip {
+            color: #f0f0f0;
+            font-size: 12px;
+        }
+
+        /* Font Awesome icons */
+        .icon {
+            margin-right: 8px;
+            color: #4CE687;
+        }
+
+        /* Adjusted width for the review box */
+        .add-review-section {
+            width: 100%;
+            max-width: 800px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Flight Reviews</h1>
+        <div class="nav-box">
+            <div class="nav-buttons">
+                <a href="{{ url_for('home') }}"><i class="fas fa-home icon"></i>Home</a>
+                <a href="{{ url_for('add_review') }}"><i class="fas fa-plus icon"></i>Add a Review</a>
+                <!-- Add other navigation links as needed -->
+            </div>
+        </div>
+    </div>
+
+    <div class="add-review-section">
+        <h2>Add Review</h2>
+        <form method="post" action="{{ url_for('add_review') }}">
+            <div class="form-group">
+                <label for="airline"><i class="fas fa-plane icon"></i>Airline:</label>
+                <input type="text" name="airline" required>
+            </div>
+
+            <div class="form-group">
+                <label for="flight_number"><i class="fas fa-ticket-alt icon"></i>Flight Number:</label>
+                <input type="text" name="flight_number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="registration"><i class="fas fa-id-card icon"></i>Registration:</label>
+                <input type="text" name="registration" required>
+            </div>
+
+            <div class="form-group">
+                <label for="departure_airport"><i class="fas fa-plane-departure icon"></i>Departure Airport:</label>
+                <input type="text" name="departure_airport" required>
+            </div>
+
+            <div class="form-group">
+                <label for="arrival_airport"><i class="fas fa-plane-arrival icon"></i>Arrival Airport:</label>
+                <input type="text" name="arrival_airport" required>
+            </div>
+
+            <div class="form-group">
+                <label for="aircraft_type"><i class="fas fa-fighter-jet icon"></i>Aircraft Type:</label>
+                <input type="text" name="aircraft_type" required>
+            </div>
+
+            <div class="form-group">
+                <label for="departure_delay"><i class="fas fa-clock icon"></i>Departure Delay in minutes:</label>
+                <input type="number" name="departure_delay" required>
+            </div>
+
+            <div class="form-group">
+                <label for="aircraft_cleanliness"><i class="fas fa-spray-can icon"></i>Aircraft Cleanliness:</label>
+                <input type="number" name="aircraft_cleanliness" min="0" max="10" required>
+            </div>
+
+            <div class="form-group">
+                <label for="friendliness"><i class="fas fa-smile icon"></i>Friendliness:</label>
+                <input type="number" name="friendliness" min="0" max="10" required>
+            </div>
+
+            <div class="form-group">
+                <label for="entertainment_quality"><i class="fas fa-tv icon"></i>Entertainment Quality:</label>
+                <input type="number" name="entertainment_quality" min="0" max="10" required>
+            </div>
+
+            <div class="form-group">
+                <label for="food_quality"><i class="fas fa-utensils icon"></i>Food Quality:</label>
+                <input type="number" name="food_quality" min="0" max="10" required>
+            </div>
+
+            <div class="form-group">
+                <label for="user_friendliness"><i class="fas fa-user-friends icon"></i>User Friendliness:</label>
+                <input type="number" name="user_friendliness" min="0" max="10" required>
+            </div>
+
+            <button type="submit">Add Review</button>
+        </form>
+    </div>
+
+    <div class="info-section">
+        <h2>Writing Tip</h2>
+        <p class="fun-travel-tip">Enhance your review with specific details about your experience, such as the quality of service, notable incidents, and any tips for future travelers.</p>
+    </div>
+</body>
+
+</html>
