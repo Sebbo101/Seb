@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="/static/styles/main.css" />
     <link rel="stylesheet" href="/static/styles/styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous">
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Reviews</title>
@@ -15,31 +15,74 @@
             color: #f0f0f0;
             background: #002147;
             font-family: 'D-DIN', sans-serif;
-            margin: 20px;
-            line-height: 1.6;
+            margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
-            align-items: flex-start; /* Align content to the left */
-            justify-content: center; /* Center content vertically */
-            min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+            margin-top: 0; /* Remove default top margin */
+        }
+
+        .title-container {
+            background: #002147;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .title-box {
+            padding: 10px 20px;
+        }
+
+
+
+
+        .nav-box,
+        .testimonial-section,
+        .featured-airlines-section,
+        .about-us-section,
+        .fake-twitter-section,
+        .fake-instagram-section,
+        .contact-section,
+        .footer {
+            max-width: 820px;
+            margin: 0 auto;
+            text-align: center;
+            background: #35424a; /* Slightly darker neutral color for boxes */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+            background: #35424a;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .average-ratings-container {
+            background-color: #35424a;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
         }
 
         h1 {
             font-weight: bold;
             font-size: 32px;
             margin-bottom: 10px;
-            text-align: left;
-            margin-left: 20px;
-        }
-
-        .average-ratings-container {
-            background-color: #35424a; /* Use the same color as the boxes on the home page */
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px; /* Add margin to separate from the title */
-            width: fit-content; /* Adjust the width based on content */
-            display: inline-block; /* Make the box inline to surround the letters */
-            text-align: center; /* Center the content within the box */
         }
 
         h2 {
@@ -62,115 +105,39 @@
             color: #007BFF;
             font-weight: bold;
         }
-
-        p {
-            margin-bottom: 20px;
-        }
-
-        .nav-box,
-        .add-review-section,
-        .info-section {
-            max-width: 800px;
-            text-align: center;
-            background: #35424a;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 40px;
-        }
-
-        .nav-buttons {
-            position: absolute;
-            top: 0;
-            right: 20px;
-        }
-
-        .nav-buttons a {
-            text-decoration: none;
-            color: #007BFF;
-            font-weight: bold;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px.
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 8px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            transition: border-color 0.3s ease;
-        }
-
-        input:focus {
-            border-color: #4CE687;
-        }
-
-        button {
-            background: linear-gradient(to right, #3826AD, #4ce687);
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .small-box {
-            position: fixed;
-            bottom: 15px;
-            right: 20px;
-            max-width: 230px;
-            background: #35424a;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .fun-travel-tip {
-            color: #f0f0f0;
-            font-size: 12px;
-        }
-
-        .icon {
-            margin-right: 8px;
-            color: #4CE687;
-        }
-
-        .add-review-section {
-            width: 100%;
-            max-width: 800px;
-        }
     </style>
 </head>
 
 <body>
-    <h1>Flight Reviews</h1>
-
-    <div class="average-ratings-container">
-        <h2>Average Ratings</h2>
-        <ul>
-            {% for category, average_rating in average_ratings.items() %}
-                <li><strong>{{ category }}:</strong> {{ average_rating|default('No reviews yet')|round(1) }}</li>
-            {% endfor %}
-        </ul>
+    <div class="title-container">
+        <div class="title-box">
+            <h1>Flight Reviews</h1>
+        </div>
     </div>
 
-    <div class="nav-buttons">
-        <p><a href="{{ url_for('index') }}">Back to Home</a></p>
+    <div class="nav-container">
+        <div class="nav-box">
+            <div class="nav-buttons">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('add_review') }}">Add a Review</a>
+                <a href="{{ url_for('top_airlines') }}">Top Airlines</a>
+                <a href="{{ url_for('flop_airlines') }}">Flop Airlines</a>
+                <a href="{{ url_for('custom_ranking') }}">Custom Ranking</a>
+                <a href="{{ url_for('search') }}">Search Reviews</a>
+                <a href="{{ url_for('category_overviews') }}">Category Overviews</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Average Ratings</h2>
+        <div class="average-ratings-container">
+            <ul>
+                {% for category, average_rating in average_ratings.items() %}
+                <li><strong>{{ category }}:</strong> {{ average_rating|default('No reviews yet')|round(1) }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </body>
 

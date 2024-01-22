@@ -1,41 +1,104 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, flash, session
 from flask_migrate import Migrate
-from models import db, Review
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_bcrypt import Bcrypt
+from flask_wtf import FlaskForm
+from forms import RegistrationForm, LoginForm
+from wtforms import StringField, PasswordField, SubmitField, validators
+from models import db, Review, User
 from sqlalchemy import or_, desc, func
 from datetime import datetime
 
+# Initialiseer de Flask-applicatie
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///reviews.db'  # SQLite-database bestand
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'geheime_sleutel'  # Geheime sleutel voor sessiebeheer
 db.init_app(app)
+
+# Initialiseer Flask-Migrate voor database migraties
 migrate = Migrate(app, db)
 
+# Initialiseer Flask-Login voor gebruikerssessies
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'  # De naam van de loginweergave
+
+# Initialiseer Flask-Bcrypt voor wachtwoordhashing
+bcrypt = Bcrypt(app)
+
+# Functie om gebruikers te laden op basis van gebruikers-ID (nodig voor Flask-Login)
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+# Startpunt van de applicatie - toont alle recensies
 @app.route('/')
 def index():
     reviews = Review.query.all()
     return render_template('index.html', reviews=reviews)
 
-# test route voor home
+# Testroute voor de homepagina
 @app.route('/home')
 def home():
     reviews = Review.query.all()
     return render_template('home.html', reviews=reviews)
 
+# Route voor gebruikersregistratie
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        # Ingevuld registratieformulier verwerken en gebruiker toevoegen aan database
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        flash('Your account has been created! You are now able to log in.', 'success')
+        return redirect(url_for('login'))
+    return render_template('register.html', form=form)  # Render het register.html-bestand
+
+# Route voor gebruikersinloggen
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            # Inloggen van de gebruiker en doorverwijzen naar de startpagina
+            login_user(user, remember=form.remember.data)
+            next_page = request.args.get('next')
+            return redirect(next_page) if next_page else redirect(url_for('index'))
+        else:
+            flash('Login unsuccessful. Please check email and password.', 'danger')
+    return render_template('login.html', form=form)  # Render het login.html-bestand
+
+# Route voor uitloggen
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+# Route voor het overzicht van recensies
 @app.route('/reviews')
 def review_overview():
     reviews = Review.query.order_by(Review.timestamp.desc()).all()
     return render_template('review_overview.html', reviews=reviews)
 
+# RESTful API voor recensies
 @app.route('/api/reviews')
 def api_reviews():
     filter_option = request.args.get('filter', 'all')
 
-    # Haal reviews op basis van het filter
+    # Haal recensies op basis van het filter
     if filter_option == 'all':
         reviews = Review.query.order_by(Review.timestamp.desc()).all()
     elif filter_option == 'airline':
         reviews = Review.query.order_by(Review.timestamp.desc()).all()
-    # Voeg hier andere filters toe op basis van je attributen (voeg extra elif-clausules toe)
+    # Voeg hier andere filters toe op basis van attributen (voeg extra elif-clausules toe)
     else:
         return jsonify([])
 
@@ -44,8 +107,10 @@ def api_reviews():
 
     return jsonify(reviews_data)
 
+# Route voor het toevoegen van recensies
 @app.route('/add_review', methods=['GET', 'POST'])
 def add_review():
+
     if request.method == 'POST':
         airline = request.form.get('airline')
         flight_number = request.form.get('flight_number')
@@ -82,11 +147,13 @@ def add_review():
 
     return render_template('add_review.html')
 
+# Route voor het bekijken van individuele recensies
 @app.route('/review/<int:review_id>')
 def view_review(review_id):
     review = Review.query.get_or_404(review_id)
     return render_template('review_detail.html', review=review)
 
+# Route voor het uitvoeren van zoekopdrachten
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     if request.method == 'POST':
@@ -125,18 +192,21 @@ def search():
     # Als het geen POST-verzoek is, toon dan gewoon het zoekformulier
     return render_template('search.html')
 
+# Route voor het bekijken van de top-airlines
 @app.route('/top_airlines')
 def top_airlines():
     # Haal de top airlines op basis van een bepaalde metriek (bijvoorbeeld vriendelijkheid)
     top_airlines = Review.query.order_by(desc(Review.friendliness)).limit(10).all()
     return render_template('top_airlines.html', top_airlines=top_airlines)
 
+# Route voor het bekijken van de flop-airlines
 @app.route('/flop_airlines')
 def flop_airlines():
     # Haal de flop airlines op basis van een bepaalde metriek (bijvoorbeeld vriendelijkheid)
     flop_airlines = Review.query.order_by(Review.friendliness).limit(10).all()
     return render_template('flop_airlines.html', flop_airlines=flop_airlines)
 
+# Route voor het genereren van aangepaste ranglijsten
 @app.route('/custom_ranking', methods=['GET', 'POST'])
 def custom_ranking():
     if request.method == 'POST':
